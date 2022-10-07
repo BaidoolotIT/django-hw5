@@ -1,0 +1,59 @@
+{% extends 'main.html' %}
+{% block comments %}
+    <div class="comments">
+        <form action="/posts/{{ post.id }}/" method="post">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <input type="submit" value="добавить комент">
+        </form>
+    </div>
+{% endblock %}
+
+
+
+{% block post %}
+
+    <style type="text/css">
+        .post_block {
+
+        }
+        .post_block h1 {
+            text-align: center;
+            color: #242b2e;
+        }
+        .post_block h5 {
+            text-align: center;
+            color: #242b2e;
+        }
+    </style>
+    <div class="post_block">
+        <img src="/media/{{ post.image }}" alt="" style="width: 200px">
+        <h1>{{ post.title }}</h1>
+        <h5>{{ post.description }}</h5>
+        <p>{{ post.date }}</p>
+        <p>{{ post.stars }}</p>
+        <p>{{ post.type }}</p>
+    </div>
+
+    <div>
+        {% for comm in comments %}
+            <div class="comment_block">
+                <h3>Author: {{ comm.author }}</h3>
+                <p>{{ comm.text }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
